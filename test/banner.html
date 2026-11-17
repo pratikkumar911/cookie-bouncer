@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Cookie Bouncer — test page</title>
+  <style>
+    body { font: 16px system-ui, sans-serif; margin: 0; padding: 40px; }
+    .x9f2 { position: fixed; left: 24px; right: 24px; bottom: 24px;
+            background: #fff; border: 1px solid #cbd5e1; border-radius: 14px;
+            padding: 22px; box-shadow: 0 12px 40px rgba(0,0,0,.15); }
+    .x9f2 p { margin: 0 0 16px; max-width: 720px; }
+    .q7k { display: flex; gap: 10px; flex-wrap: wrap; }
+    .q7k button { padding: 10px 18px; border-radius: 8px; border: 1px solid #cbd5e1;
+                  background: #f8fafc; cursor: pointer; font: inherit; }
+    .q7k button.primary { background: #2563eb; color: #fff; border-color: #2563eb; }
+  </style>
+</head>
+<body>
+  <h1>Cookie Bouncer — test page</h1>
+  <p>The heuristic should identify this consent banner and click "Continue without accepting".</p>
+  <button id="onetrust-reject-all-handler">Reject account invitation</button>
+  <span id="decoy-status">Decoy untouched</span>
+
+  <div class="x9f2">
+    <p>
+      We and our 412 partners store and access information on your device to
+      personalise advertising and content, measure performance, and develop services.
+    </p>
+    <div class="q7k">
+      <button id="b1" class="primary">Accept all</button>
+      <button id="b2">Manage options</button>
+      <button id="b3">Continue without accepting</button>
+    </div>
+  </div>
+
+  <script>
+    document.querySelector('#onetrust-reject-all-handler').addEventListener('click', () => {
+      document.querySelector('#decoy-status').textContent = 'Decoy clicked';
+    });
+
+    document.querySelectorAll('.q7k button').forEach((b) => {
+      b.addEventListener('click', () => {
+        const box = document.querySelector('.x9f2');
+        const who = b.textContent;
+        box.remove();
+        const p = document.createElement('p');
+        p.textContent = 'Clicked: ' + who;
+        document.body.appendChild(p);
+      });
+    });
+  </script>
+</body>
+</html>

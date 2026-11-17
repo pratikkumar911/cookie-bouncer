@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <title>Cookie Bouncer</title>
+  <style>
+    body {
+      width: 280px;
+      margin: 0;
+      font: 13px system-ui, -apple-system, sans-serif;
+      color: #0f172a;
+    }
+
+    .wrap {
+      padding: 14px;
+    }
+
+    .row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+
+    .big {
+      font-size: 24px;
+      font-weight: 700;
+      line-height: 1.1;
+    }
+
+    .muted {
+      color: #64748b;
+      font-size: 11.5px;
+    }
+
+    .sep {
+      height: 1px;
+      background: #e2e8f0;
+      margin: 12px 0;
+    }
+
+    button {
+      width: 100%;
+      padding: 8px;
+      margin-top: 6px;
+      cursor: pointer;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      background: #f8fafc;
+      font: inherit;
+    }
+
+    button:hover {
+      background: #eef2f7;
+    }
+
+    .switch {
+      position: relative;
+      width: 38px;
+      height: 22px;
+      flex: 0 0 auto;
+    }
+
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .slider {
+      position: absolute;
+      inset: 0;
+      background: #cbd5e1;
+      border-radius: 22px;
+      transition: .15s;
+      cursor: pointer;
+    }
+
+    .slider::before {
+      content: "";
+      position: absolute;
+      height: 16px;
+      width: 16px;
+      left: 3px;
+      top: 3px;
+      background: #fff;
+      border-radius: 50%;
+      transition: .15s;
+    }
+
+    input:checked+.slider {
+      background: #2563eb;
+    }
+
+    input:checked+.slider::before {
+      transform: translateX(16px);
+    }
+
+    .pill {
+      display: inline-block;
+      padding: 1px 7px;
+      border-radius: 999px;
+      font-size: 10.5px;
+      font-weight: 600;
+      background: #eef2ff;
+      color: #4338ca;
+    }
+
+    .pill.off {
+      background: #f1f5f9;
+      color: #64748b;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-weight: 700;
+    }
+
+    .brand svg {
+      display: block;
+    }
+  </style>
+  <link rel="icon" type="image/png" href="icons/icon32.png">
+</head>
+
+<body>
+  <div class="wrap">
+    <div class="row">
+      <span class="brand">
+        <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
+          <rect width="24" height="24" rx="5" fill="#2563eb" />
+          <circle cx="12" cy="12" r="7" fill="#fef3c7" stroke="#b45309" stroke-width="0.8" />
+          <circle cx="10" cy="10" r="1.1" fill="#92400e" />
+          <circle cx="14" cy="13" r="0.9" fill="#92400e" />
+          <line x1="5" y1="19" x2="19" y2="5" stroke="#fff" stroke-width="3.4" stroke-linecap="round" />
+          <line x1="5" y1="19" x2="19" y2="5" stroke="#dc2626" stroke-width="2.2" stroke-linecap="round" />
+        </svg>
+        Cookie Bouncer
+      </span>
+      <label class="switch">
+        <input type="checkbox" id="enabled" />
+        <span class="slider"></span>
+      </label>
+    </div>
+
+    <div class="row" style="margin-bottom:4px">
+      <div>
+        <div class="big" id="count">0</div>
+        <div class="muted">banners bounced</div>
+      </div>
+    </div>
+
+    <div class="sep"></div>
+
+    <button id="pause">Pause on this site</button>
+    <button id="rescan">Rescan this page</button>
+  </div>
+  <script src="popup.js"></script>
+</body>
+
+</html>
